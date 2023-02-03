@@ -1,0 +1,13 @@
+.app-content {
+    display: flex;
+    height: 100%;
+    overflow: hidden;
+}
+
+.conversation-wrap {
+    max-width: 70%;
+    width: 70%;
+    background: #f4f6fb;
+    margin: 0;
+    border-left: 1px solid #e0e6ed;
+}
