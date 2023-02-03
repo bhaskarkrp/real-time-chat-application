@@ -15,6 +15,17 @@ exports.createMessage = (req, res) => {
             return res.status(500).send({ message: err.message });
         }
 
-        return res.status(200).send({ message: 'message created', res: message });
+        return res.status(200).send({ message: 'message created', data: message });
     })
+}
+
+exports.getMessages = (req, res) => {
+    Message.find({ room_id: req.query.roomId, user_id: req.query.userId })
+        .exec((err, messages) => {
+            if (err) {
+                res.status(500).send({ message: err.message });
+            }
+
+            return res.status(200).send({ message: 'messages found', data: messages });
+        })
 }

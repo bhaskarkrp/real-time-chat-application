@@ -25,4 +25,5 @@ module.exports = function (app) {
 
     //message routes
     messageRoute.createMessage(app);
+    messageRoute.getMessages(app);
 }
