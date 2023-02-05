@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createMessage } from "../store/features/message/messageSlice";
+import "../assets/css/dashboard.scss";
 
 function Input({ socket }) {
   const [content, setContent] = useState("");
@@ -14,16 +15,19 @@ function Input({ socket }) {
   const dispatch = useDispatch();
 
   return (
-    <div>
+    <div className="inputdiv">
       <input
+       placeholder="Type a message"
         type="text"
         value={content}
         onChange={(e) => setContent(e.currentTarget.value)}
         name="content"
+        className="input"
       />
       <input
-        type="button"
-        value="Send"
+        type="submit"
+        value="SEND"
+        className="sendbutton"
         onClick={() => {
           if (content.length > 0) {
             dispatch(

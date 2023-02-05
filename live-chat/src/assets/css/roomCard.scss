@@ -1,16 +1,14 @@
 .room-card {
     display: flex;
-    flex: 0 0 auto;
     max-width: 100%;
     height: 4rem;
     padding: 0 0 0 1.6rem;
     align-items: center;
-    border-bottom: 1px solid transparent;
-    border-left: 0.2rem solid transparent;
-    border-top: 1px solid transparent;
     cursor: pointer;
+    margin: 0.2rem 0rem;
     position: relative;
-    border: 1px solid black;
+    border: 1px solid #ded4d4;
+    border-radius: 10px;
 
     .room-thumbnail-box {
         flex: 0 0 auto;
@@ -38,13 +36,41 @@
 
     .room-card-details {
         margin: 0 0 0 1rem;
-        border-top: 1px solid #f0f4f5;
-        // padding: 1.2rem 0;
-        border-bottom: 1px solid transparent;
+        padding: 1.2rem 0;
 
         .room-name {
             font-size: 1.4rem;
             text-transform: capitalize;
         }
+    }
+}
+
+.sidebar{
+    width: 100%;
+    height: 97vh;
+    .profile{
+        position: sticky;
+        top: 0;
+        z-index: 1;
+       height: 50px; 
+       background-color:rgb(240,242,245);
+       border: 2px black;
+       .Avatar{
+         display: flex;
+         align-items: center;
+         text-align: center;
+        justify-content: space-between;
+        height: 100%;
+        padding: 0 1rem;
+       }
+
+
+      
+    }
+    .room{
+        height: 93%;
+        overflow-y: scroll;
+        scrollbar-color: red;
+      
     }
 }

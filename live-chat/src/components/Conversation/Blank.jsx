@@ -6,9 +6,16 @@ import ConversationBox from "./ConversationBox";
 function Blank({ socket }) {
   return (
     <div className="conversation-wrap">
-      <h1>Blank</h1>
+      <div className="blank">
+      <div className="avatar">
+          <span>S</span>
+        </div>
+        <h2>Blank</h2> 
+       
+      </div>
+    
       <div>
-        <ConversationBox />
+        <ConversationBox/>
         <Input socket={socket} />
       </div>
     </div>

@@ -1,6 +1,7 @@
 import React from "react";
 import Blank from "./Conversation/Blank";
 import SideBar from "./Room/SideBar";
+import "../assets/css/dashboard.scss";
 
 function Dashboard({ socket }) {
   return (
@@ -9,8 +10,7 @@ function Dashboard({ socket }) {
         <SideBar />
         <Blank socket={socket} />
       </div>
-      {/* <h3>Dashboard</h3> */}
-    </div>
+    </div>  
   );
 }
 
