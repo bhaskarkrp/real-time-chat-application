@@ -19,9 +19,10 @@ module.exports = function (app) {
 
     //user routes
     userRoute.addRoom(app)
-    
+
     //room routes
     roomRoute.createRoom(app)
+    roomRoute.getRooms(app)
 
     //message routes
     messageRoute.createMessage(app);

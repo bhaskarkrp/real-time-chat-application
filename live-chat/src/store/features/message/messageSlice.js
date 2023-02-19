@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from 'axios';
+import { get, post } from '../../../api/baseURL'
 
 const initialState = {
     data: [],
@@ -7,19 +7,14 @@ const initialState = {
 }
 
 // Action
-export const fetchMessages = createAsyncThunk('fetchMessages', async ({ roomId, userId }) => {
-    // console.log('in action', roomId, userId);
-    const response = await axios.get('http://localhost:5000/api/messages', {
-        params: { roomId, userId }
-    })
-    return await response.data;
+export const fetchMessages = createAsyncThunk('fetchMessages', async ({ roomId }) => {
+    const response = await get('/messages', { roomId });
+    return response;
 });
 
 export const createMessage = createAsyncThunk('createMessage', async (payload) => {
-    console.log(payload);
-    const response = await axios.post('http://localhost:5000/api/message', payload)
-    console.log(response.data);
-    return await response.data;
+    const response = await post('/message', payload);
+    return response;
 })
 
 export const messageSlice = createSlice({

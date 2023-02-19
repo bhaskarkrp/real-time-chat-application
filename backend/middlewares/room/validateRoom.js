@@ -22,7 +22,7 @@ validateRoomWhileCreate = (req, res, next) => {
 
 validateRoomWhileAdd = (req, res, next) => {
 
-    Room.findOne({ room_name: req.body.room_name })
+    Room.findOne({ room_name: req.body.roomName })
         .exec((err, room) => {
             if (err) {
                 return res.status(500).send({ message: err.message });

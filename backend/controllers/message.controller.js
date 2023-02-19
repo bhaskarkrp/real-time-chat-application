@@ -20,7 +20,8 @@ exports.createMessage = (req, res) => {
 }
 
 exports.getMessages = (req, res) => {
-    Message.find({ room_id: req.query.roomId, user_id: req.query.userId })
+    Message.find({ room_id: req.query.roomId })
+        .populate('user_id')
         .exec((err, messages) => {
             if (err) {
                 res.status(500).send({ message: err.message });

@@ -17,11 +17,10 @@ exports.signup = (req, res) => {
 
     user.save((err, user) => {
         if (err) {
-            res.status(500).send({ message: err.message });
-            return;
+            return res.status(500).send({ message: err.message });
         }
 
-        res.send({ message: 'Your account has been registered.', user });
+        return res.status(200).send({ message: 'Your account has been registered.', user });
     });
 };
 
@@ -57,10 +56,13 @@ exports.signin = (req, res) => {
 
             // return whole metadata
             res.status(200).send({
-                id: user._id,
-                email: user.email,
-                name: user.name,
-                avatar: user.avatar
+                message: 'User Logged in',
+                user: {
+                    id: user._id,
+                    email: user.email,
+                    name: user.name,
+                    avatar: user.avatar
+                }
             });
         });
 };

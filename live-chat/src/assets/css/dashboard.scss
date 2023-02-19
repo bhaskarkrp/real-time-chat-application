@@ -14,6 +14,7 @@
 
 .conversation-wrap {
     max-width: 70%;
+    min-width: 70%;
     box-sizing: border-box;
     background-image: url("https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png");
     border: 1px solid #e0e6ed;
@@ -55,12 +56,14 @@
 
     .conversationBox{ 
        margin-left: 15px;
-        display:grid;
+        // display:grid;
        height: 80vh;
        overflow-y: scroll;
         .right{
-            padding-left: 15px;
-            padding-right: 15px;
+            // padding-left: 15px;
+            // padding-right: 15px;
+            padding: 0.02rem 0.5rem;
+            height: max-content;
             border-radius: 10px;
             width: 40%;
             margin-top: 7px;

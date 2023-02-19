@@ -11,9 +11,16 @@ checkDuplicateEmail = (req, res, next) => {
         }
 
         if (user) {
-            return res.status(400).send({ message: 'Email already in use' });
+            return res.status(200).send({ message: 'Email already in use' });
         }
 
+        if (!req.body.name) {
+            return res.status(200).send({ message: 'Name can not be empty' });
+        }
+
+        if(!req.body.password){
+            return res.status(200).send({ message: 'Password can not be empty' });
+        }
         next();
     })
 }

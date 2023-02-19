@@ -1,23 +1,32 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createMessage } from "../store/features/message/messageSlice";
 import "../assets/css/dashboard.scss";
 
 function Input({ socket }) {
   const [content, setContent] = useState("");
 
-  // React.useEffect(() => {
-  //   socket.on("FromAPI", (data) => {
-  //     setResponse(data);
-  //   });
-  // }, []);
-
   const dispatch = useDispatch();
+  const state = useSelector((state) => state);
+
+  const onSubmitMessage = () => {
+    if (content.length > 0) {
+      const { id } = JSON.parse(localStorage.getItem("loggedIn"));
+      dispatch(
+        createMessage({
+          roomId: state.room.selectedRoom._id,
+          userId: id,
+          message: content,
+        })
+      );
+      setContent("");
+    }
+  };
 
   return (
     <div className="inputdiv">
       <input
-       placeholder="Type a message"
+        placeholder="Type a message"
         type="text"
         value={content}
         onChange={(e) => setContent(e.currentTarget.value)}
@@ -28,18 +37,7 @@ function Input({ socket }) {
         type="submit"
         value="SEND"
         className="sendbutton"
-        onClick={() => {
-          if (content.length > 0) {
-            dispatch(
-              createMessage({
-                roomId: "63d98f9d1c0b7f6ffb8effa4",
-                userId: "63d98f8e1c0b7f6ffb8effa1",
-                message: content,
-              })
-            );
-            setContent("");
-          }
-        }}
+        onClick={onSubmitMessage}
       />
     </div>
   );
