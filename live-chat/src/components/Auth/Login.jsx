@@ -2,6 +2,7 @@ import React from "react";
 import "../../assets/css/login.scss";
 import { post } from "../../api/baseURL";
 import { useNavigate } from "react-router-dom";
+import { formValidation } from "../../helpers/validation.helper";
 
 function Login() {
   const navigate = useNavigate();
@@ -12,12 +13,17 @@ function Login() {
   const handleChange = (e) => {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
   };
-  
-  const handleLoginClick = async () => {
-    const response = await post("/auth/signin", loginData);
-    setMessage(response.message);
-    setToLocalStorage(response.user);
-    console.log(response);
+
+  const handleLoginClick = () => {
+    if (formValidation(loginData, setMessage)) {
+      post("/auth/signin", loginData)
+        .then((response) => {
+          setMessage(response.message);
+          if (response.success) {
+            setToLocalStorage(response.user);
+          }
+        })
+    }
   };
 
   const setToLocalStorage = (data) => {
@@ -64,7 +70,6 @@ function Login() {
           placeholder="Email"
           id="email"
           name="email"
-          required
         />
       </div>
       <div className="form-group">
@@ -76,7 +81,6 @@ function Login() {
           placeholder="Password"
           id="password"
           name="password"
-          required
         />
       </div>
       <div className="form-group">

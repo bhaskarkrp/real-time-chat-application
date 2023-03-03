@@ -2,6 +2,7 @@ import React from "react";
 import "../../assets/css/login.scss";
 import { post } from "../../api/baseURL";
 import { useNavigate } from "react-router-dom";
+import { formValidation } from "../../helpers/validation.helper";
 
 function Signup() {
   const navigate = useNavigate();
@@ -18,9 +19,12 @@ function Signup() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleClickTest = async () => {
-    const r = await post("/auth/signup", formData);
-    setMessage(r.message);
+  const handleClickTest = () => {
+    if (formValidation(formData, setMessage))
+      post("/auth/signup", formData)
+        .then((response) => {
+          setMessage(response.message);
+        })
   };
 
   React.useEffect(() => {

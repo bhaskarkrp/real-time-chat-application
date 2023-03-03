@@ -31,12 +31,17 @@ function SideBar() {
     navigate("/login");
   };
 
+  const addRoomHandler = () => {
+    console.log('Add Room button clicked')
+  }
+
   return (
     <div className="sidebar">
       <div className="profile">
         <div className="Avatar">
           <h3>Chat Application</h3>
           <h4>{(state.user.data && state.user.data.name) || ""}</h4>
+          <button onClick={addRoomHandler}>{state.user.data && "Add Room"}</button>
           <p style={{ cursor: "pointer" }} onClick={signOutHandler}>
             {state.user.data.name ? "Sign Out" : ""}
           </p>
