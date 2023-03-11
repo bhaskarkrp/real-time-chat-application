@@ -1,19 +1,14 @@
 import React from "react";
-import Dashboard from "./components/Dashboard";
-import "./assets/css/dashboard.scss"
-
-import { io } from 'socket.io-client';
+import "./assets/css/dashboard.scss";
 import Index from "./routes/Index";
-// const socket = io('http://localhost:5000');
-const socket = null
-
-
+import { connectSocket } from "./helpers/socket/socket";
 
 function App() {
+  connectSocket();
+
   return (
     <div className="app">
       <Index />
-      {/* <Dashboard socket={socket} /> */}
     </div>
   );
 }

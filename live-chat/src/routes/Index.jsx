@@ -9,8 +9,6 @@ function Index() {
     <Router>
       <Routes>
         <Route path="/" element={<Dashboard />} />
-        {/* <Route path="/app/user/:user_id/dashboard" />
-        <Route path="/conversation/:conversation_id" /> */}
         <Route path="/login" element={<Login />} exact />
         <Route path="/signup" element={<Signup />} exact />
       </Routes>

@@ -1,3 +1,4 @@
+const { broadcastEvent } = require("../config/socket");
 const db = require("../models/index");
 
 const Message = db.message;
@@ -14,9 +15,15 @@ exports.createMessage = (req, res) => {
       return res.status(500).send({ sucess: false, message: err.message });
     }
 
-    return res
-      .status(200)
-      .send({ sucess: true, message: "message created", data: message });
+    message.populate("user_id").then((populatedMessage, err) => {
+      broadcastEvent("message_created", populatedMessage);
+
+      return res.status(200).send({
+        sucess: true,
+        message: "message created",
+        data: populatedMessage,
+      });
+    });
   });
 };
 
