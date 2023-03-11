@@ -60,6 +60,7 @@ function Login() {
           alt=""
         />
       </center>
+      <h1>Login</h1>
       <br />
       <div className="form-group">
         <input

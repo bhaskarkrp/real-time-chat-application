@@ -1,10 +1,12 @@
 import React from "react";
-// import '../../assets/css/message.scss'
+import { convertToIST, format12hours } from "../../helpers/readableTime.helper";
 
 function Message({ message }) {
 
   const readableTime = (createdAt) => {
-    return createdAt ? createdAt.split('T')[1].split(".")[0] : Date.now();
+    const { time } = convertToIST(createdAt);
+    const readableTime = time ? time.split(':').slice(0, -1).join(':') : '';
+    return format12hours(readableTime)
   }
 
   return (

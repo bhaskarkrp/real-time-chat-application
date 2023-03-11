@@ -1,9 +1,10 @@
 import React from "react";
+import { patch } from "../../api/baseURL";
 import { formValidation } from "../../helpers/validation.helper";
 
 function AddRoomForm() {
 
-    const [roomData, setRoomData] = React.useState({ name: "", password: "" });
+    const [roomData, setRoomData] = React.useState({ roomName: "", password: "" });
 
     const [message, setMessage] = React.useState("");
 
@@ -13,11 +14,13 @@ function AddRoomForm() {
 
     const handleAddRoom = () => {
         if (formValidation(roomData, setMessage)) {
-            post("/user/addroom", roomData)
+            const user = localStorage.getItem("loggedIn");
+            const { id } = JSON.parse(user);
+            patch("/user/addroom", { ...roomData, userId: id })
                 .then((response) => {
                     setMessage(response.message);
                     if (response.success) {
-                        setToLocalStorage(response.user);
+                        console.log('Room Added Successfully!')
                     }
                 })
         }
@@ -43,16 +46,17 @@ function AddRoomForm() {
                     alt=""
                 />
             </center>
+            <h1>Add Room</h1>
             <br />
             <div className="form-group">
                 <input
                     type="text"
-                    value={roomData.name}
+                    value={roomData.roomName}
                     onChange={handleChange}
                     className="form-control"
-                    placeholder="Name"
+                    placeholder="Enter the room name"
                     id="name"
-                    name="name"
+                    name="roomName"
                 />
             </div>
             <div className="form-group">
@@ -61,7 +65,7 @@ function AddRoomForm() {
                     value={roomData.password}
                     onChange={handleChange}
                     className="form-control"
-                    placeholder="Password"
+                    placeholder="Enter the room password"
                     id="password"
                     name="password"
                 />
@@ -69,14 +73,10 @@ function AddRoomForm() {
             <div className="form-group">
                 <input
                     type="submit"
-                    value="LogIn"
+                    value="Add Room"
                     onClick={handleAddRoom}
                     className="btn btn-primary"
-                />{" "}
-                &nbsp;&nbsp; Don't have account?{" "}
-                <a className="btn btn-outline-primary" href="/signup">
-                    <b>Sign Up</b>
-                </a>
+                />
             </div>
             <div className="form-group">
                 <span id="message" name="message">

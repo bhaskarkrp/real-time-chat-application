@@ -14,7 +14,15 @@ export async function get(url, params) {
 export async function post(url, payload) {
   try {
     const response = await axios.post(API_URL + url, payload);
-    // console.log(response.data);
+    return await response.data;
+  } catch (err) {
+    return err;
+  }
+}
+
+export async function patch(url, payload) {
+  try {
+    const response = await axios.patch(API_URL + url, payload);
     return await response.data;
   } catch (err) {
     return err;

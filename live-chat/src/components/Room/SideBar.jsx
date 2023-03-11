@@ -5,11 +5,15 @@ import "../../assets/css/roomCard.scss";
 import { useNavigate } from "react-router-dom";
 import { fetchUser } from "../../store/features/user/userSlice";
 import { signOut } from "../../api/baseURL";
+import AddRoomForm from "./AddRoomForm";
+import BasicModal from "../generics/BasicModal";
 
 function SideBar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const state = useSelector((state) => state);
+
+  const [openModal, setOpenModal] = React.useState(false);
 
   React.useEffect(() => {
     const user = localStorage.getItem("loggedIn");
@@ -32,11 +36,13 @@ function SideBar() {
   };
 
   const addRoomHandler = () => {
+    setOpenModal(true);
     console.log('Add Room button clicked')
   }
 
   return (
     <div className="sidebar">
+      <BasicModal open={openModal} setOpen={setOpenModal} Component={<AddRoomForm />} />
       <div className="profile">
         <div className="Avatar">
           <h3>Chat Application</h3>
