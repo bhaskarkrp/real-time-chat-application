@@ -21,7 +21,7 @@ exports.createRoom = (req, res) => {
         if (err)
           return res.status(500).send({ sucess: false, message: err.message });
 
-        res.send({
+        res.status(200).send({
           sucess: true,
           message: "Room has been successfully created!",
         });

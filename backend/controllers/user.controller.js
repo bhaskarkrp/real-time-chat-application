@@ -13,7 +13,7 @@ exports.addRoomToUser = (req, res) => {
 
       if (!user) {
         return res
-          .status(404)
+          .status(401)
           .send({ sucess: false, message: "User not found" });
       }
       const room = user.room.filter(
@@ -32,7 +32,7 @@ exports.addRoomToUser = (req, res) => {
 
           if (!updatedUser.modifiedCount) {
             return res
-              .status(401)
+              .status(500)
               .send({ sucess: false, message: "Could not add room" });
           }
 
@@ -43,7 +43,7 @@ exports.addRoomToUser = (req, res) => {
           });
         });
       } else {
-        return res.status(401).send({
+        return res.status(200).send({
           sucess: true,
           message: "Already a part of this room!",
           room: room,
