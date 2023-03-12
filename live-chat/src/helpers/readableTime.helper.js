@@ -13,6 +13,8 @@ export const format12hours = (time) => {
     if (timeArray[0] > 12) {
       timeArray[0] = timeArray[0] - 12;
       return timeArray.join(":") + " PM";
+    } else if (timeArray[0] >= 12 && timeArray[1] > 0) {
+      return timeArray.join(":") + "PM";
     } else {
       return timeArray.join(":") + " AM";
     }
