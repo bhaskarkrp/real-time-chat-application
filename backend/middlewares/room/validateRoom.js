@@ -37,7 +37,7 @@ validateRoomWhileAdd = (req, res, next) => {
     let isPasswordValid = bcrypt.compareSync(req.body.password, room.password);
 
     if (!isPasswordValid) {
-      return res.status(401).send({ message: "Invalid Password!" });
+      return res.status(200).send({ message: "Invalid Password!" });
     }
 
     req.roomId = room.id;
