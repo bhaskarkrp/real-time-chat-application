@@ -17,6 +17,7 @@
     "react-router-dom": "^6.8.1",
     "react-scripts": "5.0.1",
     "redux": "^4.2.1",
+    "sass": "^1.59.3",
     "socket.io-client": "^4.5.4",
     "web-vitals": "^2.1.4"
   },
@@ -43,8 +44,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "node-sass": "^7.0.3"
   }
 }
