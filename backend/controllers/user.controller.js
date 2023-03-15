@@ -13,7 +13,7 @@ exports.addRoomToUser = (req, res) => {
 
       if (!user) {
         return res
-          .status(401)
+          .status(200)
           .send({ sucess: false, message: "User not found" });
       }
       const room = user.room.filter(
