@@ -8,6 +8,8 @@ function ConversationBox() {
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
 
+  const bottomRef = React.useRef(null);
+
   React.useEffect(() => {
     dispatch(
       fetchMessages({
@@ -15,6 +17,11 @@ function ConversationBox() {
       })
     );
   }, [state.room.selectedRoom._id]);
+
+  React.useEffect(() => {
+    // scroll to bottom every time messages change
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [state.message.data]);
 
   if (state.message.isFetching) {
     return <p>Loading...</p>;
@@ -25,13 +32,6 @@ function ConversationBox() {
       <div className="conversationBox">
         {state.message.data &&
           state.message.data.map((message) => {
-            // if (message.user_id._id === "63d98f8e1c0b7f6ffb8effa1") {
-            //   return (
-            //     <div key={message._id} className="right">
-            //       <Message message={message} />
-            //     </div>
-            //   );
-            // } else {
             return (
               <div key={message._id} className="right">
                 <Message key={message._id} message={message} />
@@ -39,6 +39,8 @@ function ConversationBox() {
             );
             // }
           })}
+
+        <div ref={bottomRef} />
       </div>
     </div>
   );
