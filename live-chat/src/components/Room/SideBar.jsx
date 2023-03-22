@@ -7,6 +7,7 @@ import { fetchUser } from "../../store/features/user/userSlice";
 import { signOut } from "../../api/baseURL";
 import AddRoomForm from "./AddRoomForm";
 import BasicModal from "../generics/BasicModal";
+import CreateRoomForm from "./CreateRoomForm";
 
 function SideBar() {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ function SideBar() {
   const state = useSelector((state) => state);
 
   const [openModal, setOpenModal] = React.useState(false);
+  const [openCreateRoom, setOpenCreateRoom] = React.useState(false);
 
   React.useEffect(() => {
     const user = localStorage.getItem("loggedIn");
@@ -40,14 +42,21 @@ function SideBar() {
     console.log('Add Room button clicked')
   }
 
+  const createRoomHandler = () => {
+    setOpenCreateRoom(true);
+    console.log("Create room button clicked!")
+  }
+
   return (
     <div className="sidebar">
       <BasicModal open={openModal} setOpen={setOpenModal} Component={<AddRoomForm />} />
+      <BasicModal open={openCreateRoom} setOpen={setOpenCreateRoom} Component={<CreateRoomForm />} />
       <div className="profile">
         <div className="Avatar">
           <h3>Chat Application</h3>
           <h4>{(state.user.data && state.user.data.name) || ""}</h4>
-          <button onClick={addRoomHandler}>{state.user.data && "Add Room"}</button>
+          <button className="button-chat" style={{ paddingTop: "6px", paddingBottom: "6px" }} onClick={addRoomHandler}>{state.user.data && "Add Room"}</button>
+          <button className="button-chat" style={{ paddingTop: "6px", paddingBottom: "6px" }} onClick={createRoomHandler}>{state.user.data && 'Create Room'}</button>
           <p style={{ cursor: "pointer" }} onClick={signOutHandler}>
             {state.user.data.name ? "Sign Out" : ""}
           </p>

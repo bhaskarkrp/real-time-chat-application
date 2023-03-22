@@ -68,6 +68,7 @@ function Login() {
           value={loginData.email}
           onChange={handleChange}
           className="form-control"
+          style={{ padding: "0 1rem" }}
           placeholder="Email"
           id="email"
           name="email"
@@ -79,6 +80,7 @@ function Login() {
           value={loginData.password}
           onChange={handleChange}
           className="form-control"
+          style={{ padding: "0 1rem" }}
           placeholder="Password"
           id="password"
           name="password"
@@ -89,7 +91,7 @@ function Login() {
           type="submit"
           value="LogIn"
           onClick={handleLoginClick}
-          className="btn btn-primary"
+          className="button-chat"
         />{" "}
         &nbsp;&nbsp; Don't have account?{" "}
         <a className="btn btn-outline-primary" href="/signup">

@@ -1,3 +1,4 @@
+const { errorController } = require('../controllers/error.controller');
 const authRoute = require('./auth.route');
 const messageRoute = require('./message.route');
 const roomRoute = require('./room.route');
@@ -11,6 +12,8 @@ module.exports = function (app) {
         );
         next();
     });
+
+    app.use(errorController);
 
     //auth routes
     authRoute.signup(app)

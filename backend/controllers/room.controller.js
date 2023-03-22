@@ -1,25 +1,28 @@
 const db = require("../models");
 var bcrypt = require("bcryptjs");
+const { broadcastEvent } = require("../config/socket");
 
 const Room = db.room;
 const User = db.user;
 
 exports.createRoom = (req, res) => {
   const room = new Room({
-    room_name: req.body.room_name,
+    room_name: req.body.roomName,
     password: bcrypt.hashSync(req.body.password, 8),
     admin: req.body.admin,
   });
 
   room.save((err, room) => {
     if (err) {
-      return res.status(500).send({ sucess: false, message: err.message });
+      return res.status(200).send({ sucess: false, message: err.message });
     }
 
     User.findByIdAndUpdate(room.admin, { $push: { room: room._id } }).exec(
       (err, user) => {
         if (err)
-          return res.status(500).send({ sucess: false, message: err.message });
+          return res.status(200).send({ sucess: false, message: err.message });
+
+          broadcastEvent('room_created', room);
 
         res.status(200).send({
           sucess: true,

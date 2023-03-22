@@ -1,8 +1,8 @@
 import React from "react";
-import { patch } from "../../api/baseURL";
+import { post } from "../../api/baseURL";
 import { formValidation } from "../../helpers/validation.helper";
 
-function AddRoomForm() {
+function CreateRoomForm() {
 
     const [roomData, setRoomData] = React.useState({ roomName: "", password: "" });
 
@@ -16,11 +16,11 @@ function AddRoomForm() {
         if (formValidation(roomData, setMessage)) {
             const user = localStorage.getItem("loggedIn");
             const { id } = JSON.parse(user);
-            patch("/user/addroom", { ...roomData, userId: id })
+            post("/room/createroom", { ...roomData, admin: id })
                 .then((response) => {
                     setMessage(response.message);
                     if (response.success) {
-                        console.log('Room Added Successfully!')
+                        console.log('Room Created Successfully!')
                     }
                 })
         }
@@ -46,7 +46,7 @@ function AddRoomForm() {
                     alt=""
                 />
             </center>
-            <h1>Add Room</h1>
+            <h1>Create Room</h1>
             <br />
             <div className="form-group">
                 <input
@@ -75,7 +75,7 @@ function AddRoomForm() {
             <div className="form-group">
                 <input
                     type="submit"
-                    value="Add Room"
+                    value="Create Room"
                     onClick={handleAddRoom}
                     className="button-chat"
                 />
@@ -89,4 +89,4 @@ function AddRoomForm() {
     );
 };
 
-export default AddRoomForm;
+export default CreateRoomForm;

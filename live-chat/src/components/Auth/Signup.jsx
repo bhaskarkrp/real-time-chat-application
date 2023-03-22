@@ -64,6 +64,7 @@ function Signup() {
           <input
             type="password"
             className="form-control"
+            style={{ padding: "0 1rem" }}
             placeholder="Password"
             value={formData.password}
             onChange={onChangeHandler}
@@ -78,6 +79,7 @@ function Signup() {
           <input
             type="email"
             className="form-control"
+            style={{ padding: "0 1rem" }}
             placeholder="Email"
             value={formData.email}
             onChange={onChangeHandler}
@@ -92,7 +94,7 @@ function Signup() {
           type="submit"
           value="SignUp"
           onClick={handleClickTest}
-          className="btn btn-primary"
+          className="button-chat"
         />{" "}
         &nbsp;&nbsp; Already registered?{" "}
         <a className="btn-outline-info" href="/login">

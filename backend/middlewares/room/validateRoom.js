@@ -8,12 +8,12 @@ validateRoomWhileCreate = (req, res, next) => {
     room_name: req.body.room_name,
   }).exec((err, room) => {
     if (err) {
-      return res.status(500).send({ message: err.message });
+      return res.status(200).send({ message: err.message });
     }
 
     if (room) {
       return res
-        .status(400)
+        .status(200)
         .send({
           message: "Room name is already taken, please use some other name.",
         });

@@ -1,6 +1,8 @@
+const { broadcastEvent } = require("../config/socket");
 const db = require("../models");
 
 const User = db.user;
+const Room = db.room;
 
 exports.addRoomToUser = (req, res) => {
   //api - body: {userId, roomName, password}
@@ -35,6 +37,11 @@ exports.addRoomToUser = (req, res) => {
               .status(500)
               .send({ sucess: false, message: "Could not add room" });
           }
+
+          const addedRoom = Room.findById(req.roomId)
+            .exec((err, room) => {
+              broadcastEvent('room_added', room);
+            })
 
           return res.status(200).send({
             sucess: true,

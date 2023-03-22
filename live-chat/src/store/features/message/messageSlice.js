@@ -32,10 +32,9 @@ export const messageSlice = createSlice({
       const isAlreadyExists = state.data.find(
         (message) => message._id === action.payload._id
       );
-      console.log({ isAlreadyExists, message: action.payload });
+      
       if (!isAlreadyExists && action.payload.room_id == state.data[0].room_id) {
         state.data = [...state.data, action.payload];
-        console.log({ state });
       }
     },
   },
@@ -71,4 +70,5 @@ export const messageSlice = createSlice({
 });
 
 export const { addMessage } = messageSlice.actions;
+// export const messageStore = (state) => state;
 export default messageSlice.reducer;
