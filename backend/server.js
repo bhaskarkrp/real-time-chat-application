@@ -34,8 +34,7 @@ app.get("/", (req, res) => {
 });
 
 const uri =
-  process.env.MONGODB_URI ||
-  "mongodb+srv://roomchat:roomchat@cluster0.1w2h9cw.mongodb.net/?retryWrites=true&w=majority";
+  process.env.MONGODB_URI;
 mongoose.connect(uri);
 const connection = mongoose.connection;
 connection.once("open", () => {
